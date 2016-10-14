@@ -459,7 +459,7 @@ try {
                             data = JSON.stringify(data);
                             fs.writeFile(read, data, function(err) {
                                 if (err) return console.log(err);
-                                output("Data has been successfully pushed to salkhan/data.json");
+                                output("Data has been successfully pushed to tucker/data.json");
                             });
                             send(message, "\uD83D\uDCE3 Completed process.\n```javascript\n{user: \"" + lq[1] + "\", quote: \"" + lq[2] + "\"}```");
                         } else {
@@ -498,7 +498,7 @@ try {
                             data = JSON.stringify(data);
                             fs.writeFile(read, data, function(err) {
                                 if (err) return console.log(err);
-                                output("Data has been successfully pushed to salkhan/data.json");
+                                output("Data has been successfully pushed to tucker/data.json");
                                 send(message, "Done! You are now part of group `" + lq + "`");
                             });
                         } else {
@@ -537,7 +537,7 @@ try {
                                 data = JSON.stringify(data);
                                 fs.writeFile(read, data, function(err) {
                                     if (err) return console.log(err);
-                                    output("Data has been successfully pushed to salkhan/data.json");
+                                    output("Data has been successfully pushed to tucker/data.json");
                                     send(message, "Done! You have now left group `" + lq + "`");
                                 });
                             }
@@ -634,7 +634,7 @@ try {
                     data = JSON.stringify(data);
                     fs.writeFile(read, data, function(err) {
                         if (err) return console.log(err);
-                        output("Data has been successfully pushed to salkhan/data.json");
+                        output("Data has been successfully pushed to tucker/data.json");
                     });
                     send(message, "Yay, you are now in the database!");
                 }break;
@@ -777,7 +777,7 @@ try {
                         data = JSON.stringify(data);
                         fs.writeFile(read, data, function(err) {
                             if (err) return console.log(err);
-                            output("ata has been successfully pushed to salkhan/data.json");
+                            output("data has been successfully pushed to tucker/data.json");
                         });
                         send(message, "Yay, " + lq[1] + "'s KA name has been added to the database!");
                     } else {
