@@ -1055,7 +1055,7 @@ try {
         if (age.channel.id === "210943602816188416") {
             send("210942312308539394", "\uD83D\uDCE3 @everyone Rules updated! Be sure to check out #info for all the new things!");
         }
-        if (age.content.match(/discord\.gg/gim) && mess.author.id !== "198942810571931649") {
+        if (age.content.match(/discord\.gg/gim) && mess.author.id !== "198942810571931649" && mess.author.id !== Client.user.id) {
             Client.deleteMessage(age);
         }
         if (!mess || !age) {
@@ -1103,11 +1103,6 @@ try {
         "Mao. That's about it."
     ];
     setInterval(function() {
-        var Mao = Math.random();
-        if (Mao < 0.00005) {
-            console.log(Mao);
-            //send(Client.channels[Math.floor(Math.random()*Client.channels.length)], statements[Math.floor(Math.random()*statements.length)]);
-        }
         frameCount++;
         apiCooldown--;
         if (moveToTimeout > 0) {
