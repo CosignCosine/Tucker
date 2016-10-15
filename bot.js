@@ -132,6 +132,52 @@ initial_variables_and_constants_and_functions: {
             return coefficient + "√(" + radical + ")";
         }
     }
+    //all blocked text in the !eval command
+    var blockedRegex = [
+        /[^0-9]\.[^0-9]/, //Any use of decimal point that's not in a number. Could be \D\.\D
+        /<(\w+)>/,
+        /Client/, 
+        /Date/, 
+        /Discord/,
+        /Array/,
+        /Set/,
+        /Math/,
+        /Number/,
+        /Map/,
+        /Object/,
+        /Symbol/,
+        /new/,
+        /function/i,
+        /fromCharCode/,
+        /with/,
+        /fs/,
+        /request/,
+        /constructor/,
+        /process/,
+        /while/,
+        /for/,
+        /writeFile/,
+        /send/,
+        /prototype/,
+        /exit/,
+        /require/,
+        /eval/,
+        /message/,
+        /__evaluation/,
+        /\"/,
+        /\+=/,
+        /-=/,
+        /\*=/,
+        /\/=/,
+        /{/,
+        /=>/,
+        /\[/,
+        /\?/,
+        /",/,
+        /;/,
+        /\(\)/,
+        /\(\"/,
+    ];
 }
 
 documentation: {
@@ -451,51 +497,7 @@ try {
                         Client.startTyping(message.channel);
                         var __evaluation = message.content.substr(6, message.content.length);
                         
-                        var blockedRegex = [
-                            /[^0-9]\.[^0-9]/, //Any use of decimal point that's not in a number. Could be \D\.\D
-                            /<(\w+)>/,
-                            /Client/, 
-                            /Date/, 
-                            /Discord/,
-                            /Array/,
-                            /Set/,
-                            /Math/,
-                            /Number/,
-                            /Map/,
-                            /Object/,
-                            /Symbol/,
-                            /new/,
-                            /function/i,
-                            /fromCharCode/,
-                            /with/,
-                            /fs/,
-                            /request/,
-                            /constructor/,
-                            /process/,
-                            /while/,
-                            /for/,
-                            /writeFile/,
-                            /send/,
-                            /prototype/,
-                            /exit/,
-                            /require/,
-                            /eval/,
-                            /message/,
-                            /__evaluation/,
-                            /\"/,
-                            /\+=/,
-                            /-=/,
-                            /\*=/,
-                            /\/=/,
-                            /{/,
-                            /=>/,
-                            /\[/,
-                            /\?/,
-                            /",/,
-                            /;/,
-                            /\(\)/,
-                            /\(\"/,
-                        ];
+                        
                         
                         var codeIsBlocked = false;
                         for (var i = 0; i < blockedRegex.length; i++) {
