@@ -100,8 +100,37 @@ initial_variables_and_constants_and_functions: {
     var badges = [];
     //for factorial maybe we could get a BigNumber node module because of how fast it grows
     function factorial(n) {
-        for (var m = 1; n > 0; n--) { m *= n; }
+        for (var m = 1; n > 0; n--) { 
+            m *= n; 
+        }
         return m;
+    }
+    //gets and simplifies the radical of any number (only square roots)
+    function radical(n) {
+        if (n === 1) {
+            return 1;
+        } else if (n === 0) {
+            return 0;
+        } else if (n < 0) {
+            return "boi i don't do imaginary numbers";
+        }
+
+        var coefficient = 1;
+        var radical = n;
+
+        for (var i = 2; i * i <= n; i++) {
+            while (radical % (i * i) === 0) {
+                radical /= i * i;
+                coefficient *= i;
+            }
+        }
+        if (coefficient === 1) {
+            return "√(" + radical + ")";
+        } else if (radical === 1) { 
+            return coefficient;
+        } else {
+            return coefficient + "√(" + radical + ")";
+        }
     }
 }
 
