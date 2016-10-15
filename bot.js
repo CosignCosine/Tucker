@@ -130,7 +130,8 @@ documentation: {
         "8ball": "Runs an 8-Ball on a question. Don't spam, please!\n\n*Usage:* `!8ball [question]`",
         "promoted": "Shows the currently promoted program.\n\n*Usage:* `!promoted`",
         "promote": "Sends a request for a specified program to be promoted.\n\n*Usage:* `!promote <programnumber>`",
-        "ping": "Pings the bot. \n\n*Usage:* `!ping`"
+        "ping": "Pings the bot.\n\n*Usage:* `!ping`",
+        "ask": "Asks the bot a direct question.\n\n*Usage:* `!ask`" // Feature in prograss by KonurPapa
     };
 }
 
@@ -873,6 +874,18 @@ try {
                             send(message, "I'm afraid you don't have the right permissions to use this command.");
                         }
                     }
+                    break; // Feature in prograss by KonurPapa
+                case "!google" + endsub(7):
+                    var myWebRequest = WebRequest.Create(www.google.com);
+                    var myWebResponse = myWebRequest.GetResponse();
+                    send(message, "Answer: " + myWebResponse);
+                    
+                    /*Client.startTyping(message.channel);
+                    var lf = contentBegins(message, "!g ") ? 2 : contentBegins(message, "!goog ") ? 5 : 7; //jshint ignore:line
+                    var lq = message.content; //jshint ignore:line
+                    lq = lq.substr(lf + 1, lq.length);
+                    lq = lq.replace(/ /gim, "+");
+                    send(message, "\uD83D\uDCE3 http://lmgtfy.com/?q=" + lq);*/
                     break;
                 default: //  now you don't need these if else statements lol ikr
                     {
