@@ -781,7 +781,7 @@ try {
                             lq = lq.substr(7, lq.length);
                             lq = lq.toLowerCase();
                             if (badges.length === 0) {
-                                request("https://www.khanacademy.org/api/v1/badges", (error, __response, __body) => {
+                                request("https://www.khanacademy.org/api/v1/badges", function(error, __response, __body){
                                     if (!error && __response && __response.statusCode === 200) {
                                         var _badges = JSON.parse(__body);
                                         for (var i = 0; i < _badges.length; i++) {
