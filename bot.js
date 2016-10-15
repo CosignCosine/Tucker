@@ -587,266 +587,292 @@ try {
                         }
                     }
                     break;
-                case "!pd" + endsub("!pd".length): case "!programdata" + endsub("!programdata".length): {
-                    Client.startTyping(message.channel);
-                    if (apiCooldown < 0) {
-                        var lq = message.content; //jshint ignore:line
-                        var lf = contentBegins(message, "!pd") ? 3 : 12; //jshint ignore:line
-                        lq = lq.substr(lf + 1, lq.length);
-                        lq = lq.replace(/ /gim, "");
-                        var url = "https://www.khanacademy.org/api/labs/scratchpads/" + lq;
-                        var __data;
-                        request(url, function(error, __response, __body) {
-                            if (!error && __response && __response.statusCode === 200) {
-                                __data = JSON.parse(__body);
-                                if (__data) {
-                                    send(message, "__***" + __data.title + "***__\n• **Votes**: " + __data.sumVotesIncremented + "\n• **Spin-offs**: " + __data.spinoffCount + "\n• **Hidden from Hot List**: " + (__data.hideFromHotList ? "Yes" : "No") + "\n• **Flagged**: " + (__data.flags.length > 0 ? "Yes" : "No") + "\n• **Program Link**: https://www.khanacademy.org/cs/-/" + lq);
-                                }
-                            } else {
-                                send(message, "\uD83D\uDCE3 I got an error while parsing this command. Please try again. Status Code **" + __response.statusCode + "**");
-                            }
-                        });
-                        apiCooldown = 5000;
-                    } else {
-                        send(message, "\uD83D\uDCE3 Whoa there! You're sending WAYYYYYY too many api calls too quickly! Try again in " + Math.floor(apiCooldown / 1000) + " seconds.");
-                    }
-                }break;
-                case "!kaname" + endsub("!kaname".length): {
-                    Client.startTyping(message.channel);
-                    var lq = message.content; //jshint ignore: line
-                    lq = lq.substr(8, lq.length);
-                    lq = lq.replace("!", "");
-                    data = JSON.parse(fs.readFileSync(read, 'utf8'));
-                    if (data.kanames[lq]) {
-                        send(message, "\uD83D\uDCE3 Here is a link to this user's profile. <https://www.khanacademy.org/profile/" + data.kanames[lq] + ">");
-                    } else {
-                        send(message, "\uD83D\uDCE3 This user does not seem to have a username on file.");
-                    }
-                }break;
-                case "!addid" + endsub("!addid".length): {
-                    Client.startTyping(message.channel);
-                    var __data; //jshint ignore: line
-                    var lq = message.content; //jshint ignore: line
-                    lq = lq.substr(7, lq.length);
-                    data = JSON.parse(fs.readFileSync(read, 'utf8'));
-                    data.kanames[message.author] = lq;
-                    data = JSON.stringify(data);
-                    fs.writeFile(read, data, function(err) {
-                        if (err) return console.log(err);
-                        output("Data has been successfully pushed to salkhan/data.json");
-                    });
-                    send(message, "Yay, you are now in the database!");
-                }break;
-                case "... " + endsub(4): {
-                    var lq = message.content; //jshint ignore: line
-                    lq = lq.substr(4, lq.length);
-
-                    data = JSON.parse(fs.readFileSync(read, 'utf8'));
-                    if (data.quotes[lq]) {
-                        var randOfTheDay = Math.floor(Math.random() * data.quotes[lq].length);
-                        send(message, "\uD83D\uDCE3 " + data.quotes[lq][randOfTheDay]);
-                    } else {
-                        send(message, "\uD83D\uDCE3 I can't seem to find a quote for this user. Try again?");
-                    }
-                }break;
-                case "!check " + endsub("!check ".length): {
-                    Client.startTyping(message.channel);
-                    if (apiCooldown < 0) {
-                        var lq = message.content; //jshint ignore: line
-                        lq = lq.substr(7, lq.length);
-                        request("https://www.khanacademy.org/api/internal/user/username_available?username=" + lq, function(error, __response, __body) {
-                            if (!error && __response && __response.statusCode === 200) {
-                                if (__body === "false") {
-                                    send(message, "\uD83D\uDCE3 This username has already been taken.");
-                                } else {
-                                    send(message, "\uD83D\uDCE3 You can most definitely use this username!");
-                                }
-                            } else {
-                                send(message, "\uD83D\uDCE3 I got an error while parsing this command. Please try again. Status Code **" + __response.statusCode + "**");
-                            }
-                        });
-                        apiCooldown = 5000;
-                    } else {
-                        send(message, "\uD83D\uDCE3 Whoa there! You're sending WAYYYYYY too many api calls too quickly! Try again in " + Math.floor(apiCooldown / 1000) + " seconds.");
-                    }
-                }break;
-                case "!badge " + endsub("!badge ".length): {
-                    Client.startTyping(message.channel);
-                    if (apiCooldown < 0) {
-                        var lq = message.content; //jshint ignore: line
-                        lq = lq.substr(7, lq.length);
-                        lq = lq.toLowerCase();
-                        if (badges.length === 0) {
-                            request("https://www.khanacademy.org/api/v1/badges", (error, __response, __body) => {
+                case "!pd" + endsub("!pd".length):
+                case "!programdata" + endsub("!programdata".length):
+                    {
+                        Client.startTyping(message.channel);
+                        if (apiCooldown < 0) {
+                            var lq = message.content; //jshint ignore:line
+                            var lf = contentBegins(message, "!pd") ? 3 : 12; //jshint ignore:line
+                            lq = lq.substr(lf + 1, lq.length);
+                            lq = lq.replace(/ /gim, "");
+                            var url = "https://www.khanacademy.org/api/labs/scratchpads/" + lq;
+                            var __data;
+                            request(url, function(error, __response, __body) {
                                 if (!error && __response && __response.statusCode === 200) {
-                                    var _badges = JSON.parse(__body);
-                                    for (var i = 0; i < _badges.length; i++) {
-                                        badges[_badges[i].description.toLowerCase()] = {
-                                            name: _badges[i].description,
-                                            relative_url: _badges[i].relative_url,
-                                            icon: _badges[i].icons.large,
-                                            description: _badges[i].translated_safe_extended_description
-                                        };
-                                    }
-                                    if (badges[lq]) {
-                                        send(message, "***__" + badges[lq].name + "__***\n" + badges[lq].description + "\n https://www.khanacademy.org" + badges[lq].relative_url + "\n " + badges[lq].icon);
-                                    } else {
-                                        send(message, "\uD83D\uDCE3 This badge could not be found.");
+                                    __data = JSON.parse(__body);
+                                    if (__data) {
+                                        send(message, "__***" + __data.title + "***__\n• **Votes**: " + __data.sumVotesIncremented + "\n• **Spin-offs**: " + __data.spinoffCount + "\n• **Hidden from Hot List**: " + (__data.hideFromHotList ? "Yes" : "No") + "\n• **Flagged**: " + (__data.flags.length > 0 ? "Yes" : "No") + "\n• **Program Link**: https://www.khanacademy.org/cs/-/" + lq);
                                     }
                                 } else {
                                     send(message, "\uD83D\uDCE3 I got an error while parsing this command. Please try again. Status Code **" + __response.statusCode + "**");
                                 }
                             });
                             apiCooldown = 5000;
+                        } else {
+                            send(message, "\uD83D\uDCE3 Whoa there! You're sending WAYYYYYY too many api calls too quickly! Try again in " + Math.floor(apiCooldown / 1000) + " seconds.");
                         }
-                    } else {
-                        send(message, "\uD83D\uDCE3 Whoa there! You're sending WAYYYYYY too many api calls too quickly! Try again in " + Math.floor(apiCooldown / 1000) + " seconds.");
                     }
-                }break;
-                case "!ud" + endsub("!ud"): case "!userdata" + endsub("!userdata"): {
-                    Client.startTyping(message.channel);
-                    if (apiCooldown < 0) {
-                        var lq = message.content; //jshint ignore:line
-                        var lf = contentBegins(message, "!ud") ? 3 : 9; //jshint ignore:line
-                        lq = lq.substr(lf + 1, lq.length);
-                        lq = lq.replace(/ /gim, "");
-                        url = "https://www.khanacademy.org/api/internal/user/profile?username=" + lq + "";
-                        __data;
-                        request(url, function(error, __response, __body) {
-                            if(__response){
-                                if (!error && __response.statusCode === 200) {
-                                    __data = JSON.parse(__body);
-                                    if (__data) {
-                                        send(message, "***" + __data.nickname + "***\n`" + __data.points + " Energy Points`\n\"" + __data.bio + "\"\n*Avatar:* " + __data.avatar.imageSrc + "\n*User profile:* https://www.khanacademy.org/profile/" + lq);
-                                    } else {
-                                        send(message, "\uD83D\uDCE3 I couldn't find that user. Are you sure you typed the username correctly?");
-                                    }
-                                } else {
-                                    if(__response){
-                                        send(message, "\uD83D\uDCE3 I got an error while parsing this command. Please try again. Status Code **" + __response.statusCode + "**");
-                                    }
-                                }
-                            }
-                        });
-                        apiCooldown = 5000;
-                    } else {
-                        send(message, "\uD83D\uDCE3 Whoa there! You're sending WAYYYYYY too many api calls too quickly! Try again in " + Math.floor(apiCooldown / 1000) + " seconds.");
-                    }
-                }break;
-                case "!uin" + endsub("!uin"): {
-                    Client.startTyping(message.channel);
-                    var lq = message.content;
-                    var lf = 5;
-                    lq = lq.substr(lf, lq.length);
-                    var role = message.server.roles.get("name", lq);
-                    if (!role) {
-                        send(message, "This role could not be found.");
-                        break;
-                    } else {
-                        var users = message.server.usersWithRole(role);
-                        for (var i = 0; i < users.length; i++) {
-                            users[i] = "**" + users[i].username + "**#" + users[i].discriminator;
-                        }
-                        var _users = "**__Here are the users with this role:__**\n";
-                        for (i = 0; i < users.length; i++) { //idc if this is bad code
-                            if (users.length === 1) {
-                                _users += users[i] + ".";
-                            } else if (i === users.length - 1) {
-                                _users += "and " + users[i] + ".";
-                            } else {
-                                _users += users[i] + ", ";
-                            }
-                        }
-
-                        send(message, _users);
-                    }
-                }break;
-                case "-guardian !addid" + endsub("-guardian !addid"): {
-                    var Administrator = message.server.roles.get("name", "Guardian");
-                    if (!Administrator) break;
-                    if (Client.userHasRole(message.author, Administrator)) {
-                        var lq = message.content;
-                        var lf = 17;
-                        lq = lq.substr(lf, lq.length);
-                        lq = lq.split("\"");
+                    break;
+                case "!kaname" + endsub("!kaname".length):
+                    {
+                        Client.startTyping(message.channel);
+                        var lq = message.content; //jshint ignore: line
+                        lq = lq.substr(8, lq.length);
+                        lq = lq.replace("!", "");
                         data = JSON.parse(fs.readFileSync(read, 'utf8'));
-                        lq[2] = lq[2].substr(1, lq[2].length);
-                        lq[1].replace(/!/gim, "");
-                        data.kanames[lq[1]] = lq[2];
+                        if (data.kanames[lq]) {
+                            send(message, "\uD83D\uDCE3 Here is a link to this user's profile. <https://www.khanacademy.org/profile/" + data.kanames[lq] + ">");
+                        } else {
+                            send(message, "\uD83D\uDCE3 This user does not seem to have a username on file.");
+                        }
+                    }
+                    break;
+                case "!addid" + endsub("!addid".length):
+                    {
+                        Client.startTyping(message.channel);
+                        var __data; //jshint ignore: line
+                        var lq = message.content; //jshint ignore: line
+                        lq = lq.substr(7, lq.length);
+                        data = JSON.parse(fs.readFileSync(read, 'utf8'));
+                        data.kanames[message.author] = lq;
                         data = JSON.stringify(data);
                         fs.writeFile(read, data, function(err) {
                             if (err) return console.log(err);
-                            output("ata has been successfully pushed to salkhan/data.json");
+                            output("Data has been successfully pushed to salkhan/data.json");
                         });
-                        send(message, "Yay, " + lq[1] + "'s KA name has been added to the database!");
-                    } else {
-                        send(message, "I'm afraid you don't have the right permissions to use this command.");
+                        send(message, "Yay, you are now in the database!");
                     }
-                }break;
-                case "!ban " + endsub("!ban "): {
-                    Client.startTyping(message.channel);
-                    var Administrator = message.server.roles.get("name", "Guardian");
-                    if (!Administrator) break;
-                    if (Client.userHasRole(message.author, Administrator)) {
+                    break;
+                case "... " + endsub(4):
+                    {
+                        var lq = message.content; //jshint ignore: line
+                        lq = lq.substr(4, lq.length);
+
+                        data = JSON.parse(fs.readFileSync(read, 'utf8'));
+                        if (data.quotes[lq]) {
+                            var randOfTheDay = Math.floor(Math.random() * data.quotes[lq].length);
+                            send(message, "\uD83D\uDCE3 " + data.quotes[lq][randOfTheDay]);
+                        } else {
+                            send(message, "\uD83D\uDCE3 I can't seem to find a quote for this user. Try again?");
+                        }
+                    }
+                    break;
+                case "!check " + endsub("!check ".length):
+                    {
+                        Client.startTyping(message.channel);
+                        if (apiCooldown < 0) {
+                            var lq = message.content; //jshint ignore: line
+                            lq = lq.substr(7, lq.length);
+                            request("https://www.khanacademy.org/api/internal/user/username_available?username=" + lq, function(error, __response, __body) {
+                                if (!error && __response && __response.statusCode === 200) {
+                                    if (__body === "false") {
+                                        send(message, "\uD83D\uDCE3 This username has already been taken.");
+                                    } else {
+                                        send(message, "\uD83D\uDCE3 You can most definitely use this username!");
+                                    }
+                                } else {
+                                    send(message, "\uD83D\uDCE3 I got an error while parsing this command. Please try again. Status Code **" + __response.statusCode + "**");
+                                }
+                            });
+                            apiCooldown = 5000;
+                        } else {
+                            send(message, "\uD83D\uDCE3 Whoa there! You're sending WAYYYYYY too many api calls too quickly! Try again in " + Math.floor(apiCooldown / 1000) + " seconds.");
+                        }
+                    }
+                    break;
+                case "!badge " + endsub("!badge ".length):
+                    {
+                        Client.startTyping(message.channel);
+                        if (apiCooldown < 0) {
+                            var lq = message.content; //jshint ignore: line
+                            lq = lq.substr(7, lq.length);
+                            lq = lq.toLowerCase();
+                            if (badges.length === 0) {
+                                request("https://www.khanacademy.org/api/v1/badges", (error, __response, __body) => {
+                                    if (!error && __response && __response.statusCode === 200) {
+                                        var _badges = JSON.parse(__body);
+                                        for (var i = 0; i < _badges.length; i++) {
+                                            badges[_badges[i].description.toLowerCase()] = {
+                                                name: _badges[i].description,
+                                                relative_url: _badges[i].relative_url,
+                                                icon: _badges[i].icons.large,
+                                                description: _badges[i].translated_safe_extended_description
+                                            };
+                                        }
+                                        if (badges[lq]) {
+                                            send(message, "***__" + badges[lq].name + "__***\n" + badges[lq].description + "\n https://www.khanacademy.org" + badges[lq].relative_url + "\n " + badges[lq].icon);
+                                        } else {
+                                            send(message, "\uD83D\uDCE3 This badge could not be found.");
+                                        }
+                                    } else {
+                                        send(message, "\uD83D\uDCE3 I got an error while parsing this command. Please try again. Status Code **" + __response.statusCode + "**");
+                                    }
+                                });
+                                apiCooldown = 5000;
+                            }
+                        } else {
+                            send(message, "\uD83D\uDCE3 Whoa there! You're sending WAYYYYYY too many api calls too quickly! Try again in " + Math.floor(apiCooldown / 1000) + " seconds.");
+                        }
+                    }
+                    break;
+                case "!ud" + endsub("!ud"):
+                case "!userdata" + endsub("!userdata"):
+                    {
+                        Client.startTyping(message.channel);
+                        if (apiCooldown < 0) {
+                            var lq = message.content; //jshint ignore:line
+                            var lf = contentBegins(message, "!ud") ? 3 : 9; //jshint ignore:line
+                            lq = lq.substr(lf + 1, lq.length);
+                            lq = lq.replace(/ /gim, "");
+                            url = "https://www.khanacademy.org/api/internal/user/profile?username=" + lq + "";
+                            __data;
+                            request(url, function(error, __response, __body) {
+                                if (__response) {
+                                    if (!error && __response.statusCode === 200) {
+                                        __data = JSON.parse(__body);
+                                        if (__data) {
+                                            send(message, "***" + __data.nickname + "***\n`" + __data.points + " Energy Points`\n\"" + __data.bio + "\"\n*Avatar:* " + __data.avatar.imageSrc + "\n*User profile:* https://www.khanacademy.org/profile/" + lq);
+                                        } else {
+                                            send(message, "\uD83D\uDCE3 I couldn't find that user. Are you sure you typed the username correctly?");
+                                        }
+                                    } else {
+                                        if (__response) {
+                                            send(message, "\uD83D\uDCE3 I got an error while parsing this command. Please try again. Status Code **" + __response.statusCode + "**");
+                                        }
+                                    }
+                                }
+                            });
+                            apiCooldown = 5000;
+                        } else {
+                            send(message, "\uD83D\uDCE3 Whoa there! You're sending WAYYYYYY too many api calls too quickly! Try again in " + Math.floor(apiCooldown / 1000) + " seconds.");
+                        }
+                    }
+                    break;
+                case "!uin" + endsub("!uin"):
+                    {
+                        Client.startTyping(message.channel);
                         var lq = message.content;
                         var lf = 5;
                         lq = lq.substr(lf, lq.length);
-                        var lr = lq;
-                        lq = lq.replace("!", "");
-                        lq = lq.replace("<", "");
-                        lq = lq.replace(">", "");
-                        lq = lq.replace("@", "");
-                        var user = message.server.members[lq];
-                        for (var i in message.server.members) {
-                            if (!isNaN(i * 1)) {
-                                if (message.server.members[i] && message.server.members[i].id === lq) {
-                                    user = message.server.members[i];
+                        var role = message.server.roles.get("name", lq);
+                        if (!role) {
+                            send(message, "This role could not be found.");
+                            break;
+                        } else {
+                            var users = message.server.usersWithRole(role);
+                            for (var i = 0; i < users.length; i++) {
+                                users[i] = "**" + users[i].username + "**#" + users[i].discriminator;
+                            }
+                            var _users = "**__Here are the users with this role:__**\n";
+                            for (i = 0; i < users.length; i++) { //idc if this is bad code
+                                if (users.length === 1) {
+                                    _users += users[i] + ".";
+                                } else if (i === users.length - 1) {
+                                    _users += "and " + users[i] + ".";
+                                } else {
+                                    _users += users[i] + ", ";
                                 }
                             }
+
+                            send(message, _users);
                         }
-                        process.exit();
-                        send(message, lr + " has been banned (by IP) from the server.");
-                    } else {
-                        send(message, "I'm afraid you don't have the right permissions to use this command.");
                     }
-                }break;
-                case "!unban " + endsub("!unban "): {
-                    Client.startTyping(message.channel);
-                    var Administrator = message.server.roles.get("name", "Guardian");
-                    if (!Administrator) break;
-                    if (Client.userHasRole(message.author, Administrator)) {
-                        var lq = message.content;
-                        var lf = 7;
-                        lq = lq.substr(lf, lq.length);
-                        var lr = lq;
-                        lq = lq.replace("!", "");
-                        lq = lq.replace("<", "");
-                        lq = lq.replace(">", "");
-                        lq = lq.replace("@", "");
-                        var user = message.server.members[lq];
-                        for (i in message.server.members) {
-                            if (!isNaN(i * 1)) {
-                                if (message.server.members[i] && message.server.members[i].id === lq) {
-                                    user = message.server.members[i];
+                    break;
+                case "-guardian !addid" + endsub("-guardian !addid"):
+                    {
+                        var Administrator = message.server.roles.get("name", "Guardian");
+                        if (!Administrator) break;
+                        if (Client.userHasRole(message.author, Administrator)) {
+                            var lq = message.content;
+                            var lf = 17;
+                            lq = lq.substr(lf, lq.length);
+                            lq = lq.split("\"");
+                            data = JSON.parse(fs.readFileSync(read, 'utf8'));
+                            lq[2] = lq[2].substr(1, lq[2].length);
+                            lq[1].replace(/!/gim, "");
+                            data.kanames[lq[1]] = lq[2];
+                            data = JSON.stringify(data);
+                            fs.writeFile(read, data, function(err) {
+                                if (err) return console.log(err);
+                                output("ata has been successfully pushed to salkhan/data.json");
+                            });
+                            send(message, "Yay, " + lq[1] + "'s KA name has been added to the database!");
+                        } else {
+                            send(message, "I'm afraid you don't have the right permissions to use this command.");
+                        }
+                    }
+                    break;
+                case "!ban " + endsub("!ban "):
+                    {
+                        Client.startTyping(message.channel);
+                        var Administrator = message.server.roles.get("name", "Guardian");
+                        if (!Administrator) break;
+                        if (Client.userHasRole(message.author, Administrator)) {
+                            var lq = message.content;
+                            var lf = 5;
+                            lq = lq.substr(lf, lq.length);
+                            var lr = lq;
+                            lq = lq.replace("!", "");
+                            lq = lq.replace("<", "");
+                            lq = lq.replace(">", "");
+                            lq = lq.replace("@", "");
+                            var user = message.server.members[lq];
+                            for (var i in message.server.members) {
+                                if (!isNaN(i * 1)) {
+                                    if (message.server.members[i] && message.server.members[i].id === lq) {
+                                        user = message.server.members[i];
+                                    }
                                 }
                             }
+                            process.exit();
+                            send(message, lr + " has been banned (by IP) from the server.");
+                        } else {
+                            send(message, "I'm afraid you don't have the right permissions to use this command.");
                         }
-                        message.server.unban(user);
-                        send(message, lr + " has been unbanned from the server.");
-                    } else {
-                        send(message, "I'm afraid you don't have the right permissions to use this command.");
                     }
-                }break;
-                case "!update": {
-                    Client.startTyping(message.channel);
-                    var Administrator = message.server.roles.get("name", "Guardian");
-                    if (!Administrator) break;
-                    if (Client.userHasRole(message.author, Administrator)) {
-                        process.exit();
-                    } else {
-                        send(message, "I'm afraid you don't have the right permissions to use this command.");
+                    break;
+                case "!unban " + endsub("!unban "):
+                    {
+                        Client.startTyping(message.channel);
+                        var Administrator = message.server.roles.get("name", "Guardian");
+                        if (!Administrator) break;
+                        if (Client.userHasRole(message.author, Administrator)) {
+                            var lq = message.content;
+                            var lf = 7;
+                            lq = lq.substr(lf, lq.length);
+                            var lr = lq;
+                            lq = lq.replace("!", "");
+                            lq = lq.replace("<", "");
+                            lq = lq.replace(">", "");
+                            lq = lq.replace("@", "");
+                            var user = message.server.members[lq];
+                            for (i in message.server.members) {
+                                if (!isNaN(i * 1)) {
+                                    if (message.server.members[i] && message.server.members[i].id === lq) {
+                                        user = message.server.members[i];
+                                    }
+                                }
+                            }
+                            message.server.unban(user);
+                            send(message, lr + " has been unbanned from the server.");
+                        } else {
+                            send(message, "I'm afraid you don't have the right permissions to use this command.");
+                        }
                     }
-                }break;
+                    break;
+                case "!update":
+                    {
+                        Client.startTyping(message.channel);
+                        var Administrator = message.server.roles.get("name", "Guardian");
+                        if (!Administrator) break;
+                        if (Client.userHasRole(message.author, Administrator)) {
+                            process.exit();
+                        } else {
+                            send(message, "I'm afraid you don't have the right permissions to use this command.");
+                        }
+                    }
+                    break;
                 default: //  now you don't need these if else statements lol ikr
                     {
                         if (message.author.id !== Client.user.id) {
@@ -1009,7 +1035,7 @@ try {
         }
         Client.stopTyping(message.channel);
     });
-    Client.on("serverNewMember", (server, user) => {  //is there a reason to use the arrow other than the function?
+    Client.on("serverNewMember", (server, user) => { //is there a reason to use the arrow other than the function?
         var general = server.channels.get("name", "general");
         send(general, user + ", welcome to the chat!");
     });
@@ -1107,7 +1133,7 @@ try {
             }
         }
     }, 1);
-    Client.loginWithToken("redacted");  //remove the token when posting on github. people can use it maliciously. ik bae ;)`
+    Client.loginWithToken("redacted"); //remove the token when posting on github. people can use it maliciously. ik bae ;)`
 } catch (error) {
     console.log(error);
 }
