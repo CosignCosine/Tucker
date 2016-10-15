@@ -1078,11 +1078,6 @@ try {
         "Mao. That's about it."
     ];
     setInterval(function() {
-        var Mao = Math.random();
-        if (Mao < 0.00005) {
-            console.log(Mao);
-            //send(Client.channels[Math.floor(Math.random()*Client.channels.length)], statements[Math.floor(Math.random()*statements.length)]);
-        }
         frameCount++;
         apiCooldown--;
         if (moveToTimeout > 0) {
