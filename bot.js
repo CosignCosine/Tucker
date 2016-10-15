@@ -626,10 +626,10 @@ try {
                         Client.startTyping(message.channel);
                         var lq = message.content; //jshint ignore: line
                         lq = lq.substr(8, lq.length);
-                        lq = encodeURIComponent(lq.replace("!", ""));
+                        lq = lq.replace("!", "");
                         data = JSON.parse(fs.readFileSync(read, 'utf8'));
                         if (data.kanames[lq]) {
-                            send(message, "\uD83D\uDCE3 Here is a link to this user's profile. <https://www.khanacademy.org/profile/" + data.kanames[lq] + ">");
+                            send(message, "\uD83D\uDCE3 Here is a link to this user's profile. <https://www.khanacademy.org/profile/" + encodeURIComponent(data.kanames[lq]) + ">");
                         } else {
                             send(message, "\uD83D\uDCE3 This user does not seem to have a username on file.");
                         }
