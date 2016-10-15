@@ -425,6 +425,9 @@ try {
                         var blockedRegex = [
                             /[^0-9]\.[^0-9]/, //Any use of decimal point that's not in a number. Could be \D\.\D
                             /<(\w+)>/,
+                            /Client/, 
+                            /Date/, 
+                            /Discord/,
                             /Array/,
                             /Set/,
                             /Math/,
