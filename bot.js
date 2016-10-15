@@ -83,6 +83,7 @@ initial_variables_and_constants_and_functions: {
     var Harambe = "Innocent",
         Eytukan = "literally a mistake",
         Tariq = "math wizard?",
+        KonurPapa = "sarcasm overload. :konur:",
         RK = "RK. What is there to say about him?",
         DU = "I dunno.",
         Blaze = "never here... :sob:",
