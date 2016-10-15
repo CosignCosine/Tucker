@@ -100,11 +100,8 @@ initial_variables_and_constants_and_functions: {
     var badges = [];
     //for factorial maybe we could get a BigNumber node module because of how fast it grows
     function factorial(n) {
-        if (n === 0) {
-            return 1;
-        } else {
-            return n * factorial(n-1);
-        }
+        for (var m = 1; n > 0; n--) { m *= n; }
+        return m;
     }
     function prime(p) {
         if (((factorial(p - 1) + 1) % p === 0) && p !== 1) {
