@@ -6,9 +6,11 @@ if (){}
 ```
 
 ```javascript
-case "oOo": {
+case "oOo": 
+{
 
-} break;
+} 
+break;
 ```
 
 ```javascript
@@ -28,4 +30,4 @@ functionDef((a, b, c) => {
 });
 ```
 
-This guide is a WIP, and I plan to include more in the future. Thank you!
+For now, please do not use ES6, as I am unsure if that will work with Cloud9. However, once I am able to run it off my computer, I will update it to ES6. [Here is a list of ES6 commands and their ES5 workarounds.](http://es6-features.org/) 
