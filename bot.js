@@ -103,13 +103,6 @@ initial_variables_and_constants_and_functions: {
         for (var m = 1; n > 0; n--) { m *= n; }
         return m;
     }
-    function prime(p) {
-        if (((factorial(p - 1) + 1) % p === 0) && p !== 1) {
-            return true;
-        } else {
-            return false;
-        }
-    };
 }
 
 documentation: {
