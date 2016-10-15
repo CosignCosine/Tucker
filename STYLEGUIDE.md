@@ -1,6 +1,10 @@
 # Style Guide
 When working on this bot, please use these styling conventions: 
 
+**Variables & Constants**
+
+Use `const` where available to provide a clear distinction in a specific variable's usage. `let` may be used, but we heavily discourage it unless it's absolutely necessary (which it never is...except in that one time I had to use it). Function-scoped variables should be good for everything else though.
+
 **If Statements**
 
 Avoid using non-braced `if` statements unless it makes a clearly more simplistic way of writing a set of `if` statements. This is due to the fact that several non-braced `if` statements make a lot of code harder to debug because an occasional line could overflow the `if` statment.
