@@ -423,44 +423,31 @@ try {
                         var __evaluation = message.content.substr(6, message.content.length);
                         
                         var blockedRegex = [
+                            /[^0-9]\.[^0-9]/, //Any use of decimal point that's not in a number. Could be \D\.\D
                             /<(\w+)>/,
-                            /;/,
-                            /\(\)/,
-                            /\(\"/,
+                            /Array/,
+                            /Set/,
+                            /Math/,
+                            /Number/,
+                            /Map/,
+                            /Object/,
+                            /Symbol/,
+                            /new/,
+                            /function/i,
+                            /fromCharCode/,
+                            /with/,
+                            /fs/,
+                            /request/,
+                            /constructor/,
+                            /process/,
+                            /while/,
+                            /for/,
+                            /writeFile/,
+                            /send/,
+                            /prototype/,
                             /exit/,
                             /require/,
                             /eval/,
-                            /=>/,
-                            /Array/,
-                            /process/,
-                            /[^0-9]\.[^0-9]/, //Any use of decimal point that's not in a number. Could be \D\.\D
-                            /\w\.[^0-9]/,
-                            /[^0-9]\.\w/,
-                            /new/,
-                            /function/,
-                            /fromCharCode/,
-                            /with/,
-                            /Symbol/,
-                            /fs/,
-                            /Client/,
-                            /Date/,
-                            /Discord/,
-                            /request/,
-                            /constructor/,
-                            /\[/,
-                            /\?/,
-                            /while/,
-                            /for/,
-                            /",/,
-                            /writeFile/,
-                            /Math */,
-                            /Number/,
-                            /Map/,
-                            /send/,
-                            /Set/,
-                            /Object/,
-                            /Function/,//We already blocked "function" :/
-                            /prototype/,
                             /message/,
                             /__evaluation/,
                             /\"/,
@@ -469,6 +456,13 @@ try {
                             /\*=/,
                             /\/=/,
                             /{/,
+                            /=>/,
+                            /\[/,
+                            /\?/,
+                            /",/,
+                            /;/,
+                            /\(\)/,
+                            /\(\"/,
                         ];
                         
                         var codeIsBlocked = false;
@@ -479,7 +473,7 @@ try {
                             }
                         }
                         
-                        if (codeIsBlocked) { //Stop unblocking string operations please  
+                        if (codeIsBlocked) {
                             Client.reply(message, "\uD83D\uDCE3 Because of the capabilities of something that you have typed, it has been blocked in this mechanism because of the use of the `eval` command here."); //ye 
                         } else {
                             __evaluation = __evaluation.replace("pi", "Math.PI");
