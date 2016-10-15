@@ -1,31 +1,42 @@
 # Style Guide
-When working on this bot, please use these spacing conventions: 
+When working on this bot, please use these styling conventions: 
 
+**If Statements**
+
+Avoid using non-braced `if` statements unless it makes a clearly more simplistic way of writing a set of `if` statements. This is due to the fact that several non-braced `if` statements make a lot of code harder to debug because an occasional line could overflow the `if` statment.
 ```javascript
-if (){}
+if (x) {
+}
 ```
 
-```javascript
-case "oOo": {
-
-} break;
-```
+**Switch Statements**
 
 ```javascript
-for (){}
+switch(x) {
+    case "oOo": {
+
+    } break;
+}
 ```
 
-Please use
+**Loops**
+
 ```javascript
-functionDef(function(a, b, c){
-
-});
+for () {
+    // Code...
+}
 ```
-instead of 
-```javascript
-functionDef((a, b, c) => {
 
-});
+**Functions**
+
+Only use anonymous functions for your code and use lowerCamelCase for naming conventions.
+```js
+function doThisCoolThing () {
+}
 ```
+
+**ES6**
+
+Arrow functions and other ES6 goodies may be used if they clearly provide an advantage over their ES5 counterparts. If they do not, we advise using them to avoid confusion of their proper usage.
 
 This guide is a WIP, and I plan to include more in the future. Thank you!
