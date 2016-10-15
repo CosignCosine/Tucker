@@ -421,8 +421,65 @@ try {
                     {
                         Client.startTyping(message.channel);
                         var __evaluation = message.content.substr(6, message.content.length);
-
-                        if (__evaluation.match(/<(\w+)>|;|\(\)|\(\"|exit|require|eval|=>|Array|process|[^0-9]\.[^0-9]|\w\.[^0-9]|[^0-9]\.\w|new|function|fromCharCode|with|Symbol|fs|Client|Date|Discord|request|constructor|\[|\?|while|for|",|writeFile|Math *|Number|Map|send|Set|Object|Function|prototype|message|__evaluation|\"|\+=|-=|\*=|\/=|{/gim)) { //Stop unblocking string operations please  
+                        
+                        var blockedRegex = [
+                            /<(\w+)>/,
+                            /;/,
+                            /\(\)/,
+                            /\(\"/,
+                            /exit/,
+                            /require/,
+                            /eval/,
+                            /=>/,
+                            /Array/,
+                            /process/,
+                            /[^0-9]\.[^0-9]/, //Any use of decimal point that's not in a number. Could be \D\.\D
+                            /\w\.[^0-9]/,
+                            /[^0-9]\.\w/,
+                            /new/,
+                            /function/,
+                            /fromCharCode/,
+                            /with/,
+                            /Symbol/,
+                            /fs/,
+                            /Client/,
+                            /Date/,
+                            /Discord/,
+                            /request/,
+                            /constructor/,
+                            /\[/,
+                            /\?/,
+                            /while/,
+                            /for/,
+                            /",/,
+                            /writeFile/,
+                            /Math */,
+                            /Number/,
+                            /Map/,
+                            /send/,
+                            /Set/,
+                            /Object/,
+                            /Function/,//We already blocked "function" :/
+                            /prototype/,
+                            /message/,
+                            /__evaluation/,
+                            /\"/,
+                            /\+=/,
+                            /-=/,
+                            /\*=/,
+                            /\/=/,
+                            /{/,
+                        ];
+                        
+                        var codeIsBlocked = false;
+                        for (var i = 0; i < blockedRegex.length; i++) {
+                            if (__evaluation.match(blockedRegex[i])) {
+                                codeIsBlocked = true;
+                                break;
+                            }
+                        }
+                        
+                        if (codeIsBlocked) { //Stop unblocking string operations please  
                             Client.reply(message, "\uD83D\uDCE3 Because of the capabilities of something that you have typed, it has been blocked in this mechanism because of the use of the `eval` command here."); //ye 
                         } else {
                             __evaluation = __evaluation.replace("pi", "Math.PI");
