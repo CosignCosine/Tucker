@@ -78,7 +78,7 @@ initial_variables_and_constants_and_functions: {
     var ceil = Math.ceil;
     var queue = [];
     var numbers = 0;
-    //var auth = 'AIzaSyDQvwgUc7HGJ1oWkdhkepZq16-iBnHUnEw';//my api key for google apis
+    //var auth = 'redacted';//my api key for google apis
     //google.client.setApiKey(auth); //necessary to do anything
     var Harambe = "Innocent",
         Eytukan = "literally a mistake",
@@ -1107,7 +1107,7 @@ try {
             }
         }
     }, 1);
-    Client.loginWithToken("MjM2MjY5NTgyNjMxOTYwNTc3.CuGqtw.tkhXmS2qBRYtnXYj9hjJENDJCyk");  //remove the token when posting on github. people can use it maliciously. ik bae ;)`
+    Client.loginWithToken("redacted");  //remove the token when posting on github. people can use it maliciously. ik bae ;)`
 } catch (error) {
     console.log(error);
 }
