@@ -98,6 +98,21 @@ initial_variables_and_constants_and_functions: {
         my_life = "lonely, depressed, filled with anxiety... what is there to say ;)"; // fun eval return statements because why not
     var messageData = null;
     var badges = [];
+    //for factorial maybe we could get a BigNumber node module because of how fast it grows
+    function factorial(n) {
+        if (n === 0) {
+            return 1;
+        } else {
+            return n * factorial(n-1);
+        }
+    }
+    function prime(p) {
+        if (((factorial(p - 1) + 1) % p === 0) && p !== 1) {
+            return true;
+        } else {
+            return false;
+        }
+    };
 }
 
 documentation: {
