@@ -1,4 +1,3 @@
-//DISCLAIMER: This code is still being cleaned and is VERY WIP. I'm cleaning this as much as I can!! :) -Blaze
 /**
  * Tucker Bot
  * created by Blaze (ct200224) and Eytukan
@@ -79,7 +78,7 @@ initial_variables_and_constants_and_functions: {
     var ceil = Math.ceil;
     var queue = [];
     var numbers = 0;
-    //var auth = 'redacted';//my api key for google apis
+    //var auth = 'AIzaSyDQvwgUc7HGJ1oWkdhkepZq16-iBnHUnEw';//my api key for google apis
     //google.client.setApiKey(auth); //necessary to do anything
     var Harambe = "Innocent",
         Eytukan = "literally a mistake",
@@ -416,7 +415,7 @@ try {
                         Client.startTyping(message.channel);
                         var __evaluation = message.content.substr(6, message.content.length);
 
-                        if (__evaluation.match(/<(\w+)>|;|\(\)|\(\"|exit|require|eval|=>|Array|process|[^0123456789]\.[^0123456789]|\w\.[^0123456789]|[^0123456789]\.\w|new|function|fromCharCode|with|Symbol|fs|Client|Date|Discord|request|constructor|\[|\?|while|for|",|writeFile|Math *|Number|Map|Set|Object|Function|prototype|message|__evaluation|\"|\+=|-=|\*=|\/=|{/gim)) { //Stop unblocking string operations please  
+                        if (__evaluation.match(/<(\w+)>|;|\(\)|\(\"|exit|require|eval|=>|Array|process|[^0123456789]\.[^0123456789]|\w\.[^0123456789]|[^0123456789]\.\w|new|function|fromCharCode|with|Symbol|fs|Client|Date|Discord|request|constructor|\[|\?|while|for|",|writeFile|Math *|Number|Map|send|Set|Object|Function|prototype|message|__evaluation|\"|\+=|-=|\*=|\/=|{/gim)) { //Stop unblocking string operations please  
                             Client.reply(message, "\uD83D\uDCE3 Because of the capabilities of something that you have typed, it has been blocked in this mechanism because of the use of the `eval` command here."); //ye 
                         } else {
                             __evaluation = __evaluation.replace("pi", "Math.PI");
@@ -459,7 +458,7 @@ try {
                             data = JSON.stringify(data);
                             fs.writeFile(read, data, function(err) {
                                 if (err) return console.log(err);
-                                output("Data has been successfully pushed to tucker/data.json");
+                                output("Data has been successfully pushed to salkhan/data.json");
                             });
                             send(message, "\uD83D\uDCE3 Completed process.\n```javascript\n{user: \"" + lq[1] + "\", quote: \"" + lq[2] + "\"}```");
                         } else {
@@ -498,7 +497,7 @@ try {
                             data = JSON.stringify(data);
                             fs.writeFile(read, data, function(err) {
                                 if (err) return console.log(err);
-                                output("Data has been successfully pushed to tucker/data.json");
+                                output("Data has been successfully pushed to salkhan/data.json");
                                 send(message, "Done! You are now part of group `" + lq + "`");
                             });
                         } else {
@@ -537,7 +536,7 @@ try {
                                 data = JSON.stringify(data);
                                 fs.writeFile(read, data, function(err) {
                                     if (err) return console.log(err);
-                                    output("Data has been successfully pushed to tucker/data.json");
+                                    output("Data has been successfully pushed to salkhan/data.json");
                                     send(message, "Done! You have now left group `" + lq + "`");
                                 });
                             }
@@ -634,7 +633,7 @@ try {
                     data = JSON.stringify(data);
                     fs.writeFile(read, data, function(err) {
                         if (err) return console.log(err);
-                        output("Data has been successfully pushed to tucker/data.json");
+                        output("Data has been successfully pushed to salkhan/data.json");
                     });
                     send(message, "Yay, you are now in the database!");
                 }break;
@@ -777,7 +776,7 @@ try {
                         data = JSON.stringify(data);
                         fs.writeFile(read, data, function(err) {
                             if (err) return console.log(err);
-                            output("data has been successfully pushed to tucker/data.json");
+                            output("ata has been successfully pushed to salkhan/data.json");
                         });
                         send(message, "Yay, " + lq[1] + "'s KA name has been added to the database!");
                     } else {
@@ -1078,6 +1077,11 @@ try {
         "Mao. That's about it."
     ];
     setInterval(function() {
+        var Mao = Math.random();
+        if (Mao < 0.00005) {
+            console.log(Mao);
+            //send(Client.channels[Math.floor(Math.random()*Client.channels.length)], statements[Math.floor(Math.random()*statements.length)]);
+        }
         frameCount++;
         apiCooldown--;
         if (moveToTimeout > 0) {
@@ -1103,7 +1107,7 @@ try {
             }
         }
     }, 1);
-    Client.loginWithToken("redacted");  //remove the token when posting on github. people can use it maliciously. ik bae ;)`
+    Client.loginWithToken("MjM2MjY5NTgyNjMxOTYwNTc3.CuGqtw.tkhXmS2qBRYtnXYj9hjJENDJCyk");  //remove the token when posting on github. people can use it maliciously. ik bae ;)`
 } catch (error) {
     console.log(error);
 }
