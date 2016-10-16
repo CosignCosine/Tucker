@@ -1,5 +1,5 @@
 # Style Guide
-*Written by KCF and Blaze
+*Written by KCF and Blaze*
 
 When working on this bot, please use these styling conventions: 
 
