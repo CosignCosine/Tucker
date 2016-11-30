@@ -398,7 +398,7 @@ try {
             };
             switch (message.content) {
                 case "shell" + endsub(5):
-                    send(message, kanix.kash(message.content.substr(6, message.content.length)));
+                    send(message, kanix(message.content.substr(6, message.content.length)));
                 case "!info" + endsub(5):
                     Client.reply(message, "\n\uD83D\uDCE3 **Tucker Bot**\nRunning *TuckerNodeFramework " + ver + "*\nRunning via *node.js*, *fs.js*, and *request.js*\nCommands recieved this session: " + messageTotal + "\nChanges from previous version: " + mostRecentChange + "\nHosted on Cloud9 (https://www.c9.io/)");
                     log("Command \"info\" typed.");
