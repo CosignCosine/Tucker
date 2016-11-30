@@ -439,33 +439,4 @@ commands = {
 	}
 };
 
-// CLI
-
-var d = pwd() + "> ";
-var c = "";
-
-textFont(createFont("monospace"));
-textSize(10);
-
-stroke(255);
-
-frameRate(60);
-
-var draw = function () {
-	background(0);
-	
-	if (d.split("\n").length < 33) {
-		textAlign(LEFT, TOP);
-		text(d + c, 10, 10);
-	} else {
-		textAlign(LEFT, BOTTOM);
-		text(d + c, 10, 390);
-	}
-	
-	if (frameCount % 60 === 30) {
-		c = "|";
-	}
-	if (frameCount % 60 === 0) {
-		c = "";
-	}
-};
+module.exports = kash;
