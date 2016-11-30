@@ -16,6 +16,7 @@ requirements: {
     var youtubedl = require('youtube-dl');
     //var youtub = google.youtube('v3'); //required for specific requests
     var ffmpeg = require('fluent-ffmpeg');
+    var kanix = require('./kanix.js');
 }
 
 //root
@@ -396,6 +397,8 @@ try {
                 contented = endsub(contented.length);
             };
             switch (message.content) {
+                case "shell" + endsub(5):
+                    send(message, kanix.kash(message.content.substr(6, message.content.length)));
                 case "!info" + endsub(5):
                     Client.reply(message, "\n\uD83D\uDCE3 **Tucker Bot**\nRunning *TuckerNodeFramework " + ver + "*\nRunning via *node.js*, *fs.js*, and *request.js*\nCommands recieved this session: " + messageTotal + "\nChanges from previous version: " + mostRecentChange + "\nHosted on Cloud9 (https://www.c9.io/)");
                     log("Command \"info\" typed.");
